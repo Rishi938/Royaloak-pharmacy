@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Oak Pharmacy - Management System</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="Royal Oak Pharmacy Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/inventory.html">Inventory</a></li>
+                    <li><a href="pages/sales.html">Sales</a></li>
+                    <li><a href="pages/customers.html">Customers</a></li>
+                    <li><a href="pages/reports.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome to Royal Oak Pharmacy Management System</h1>
+                <p>Manage your pharmacy operations efficiently and effectively</p>
+            </div>
+        </section>
+
+        <section class="dashboard">
+            <div class="container">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Medicines</h3>
+                        <p class="stat-number" id="totalMedicines">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Low Stock Items</h3>
+                        <p class="stat-number" id="lowStock">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today's Sales</h3>
+                        <p class="stat-number" id="todaySales">$0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Customers</h3>
+                        <p class="stat-number" id="totalCustomers">0</p>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <ul id="activityList">
+                        <li>System initialized - Ready to start managing inventory</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Royal Oak Pharmacy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
