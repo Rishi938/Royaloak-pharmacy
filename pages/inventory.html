@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Royal Oak Pharmacy</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Royal Oak Pharmacy Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="inventory.html" class="active">Inventory</a></li>
+                    <li><a href="sales.html">Sales</a></li>
+                    <li><a href="customers.html">Customers</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Medicine Inventory</h1>
+                <button class="btn-primary" onclick="showAddMedicineForm()">Add New Medicine</button>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search medicines..." onkeyup="searchMedicines()">
+                    <select id="categoryFilter" onchange="filterByCategory()">
+                        <option value="all">All Categories</option>
+                        <option value="painkiller">Painkiller</option>
+                        <option value="antibiotic">Antibiotic</option>
+                        <option value="vitamin">Vitamin</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div id="addMedicineForm" class="form-container" style="display: none;">
+                    <h3>Add New Medicine</h3>
+                    <form onsubmit="addMedicine(event)">
+                        <input type="text" id="medicineName" placeholder="Medicine Name" required>
+                        <input type="text" id="medicineCategory" placeholder="Category" required>
+                        <input type="number" id="medicineQuantity" placeholder="Quantity" required>
+                        <input type="number" id="medicinePrice" placeholder="Price" step="0.01" required>
+                        <input type="date" id="medicineExpiry" required>
+                        <button type="submit" class="btn-primary">Add Medicine</button>
+                        <button type="button" class="btn-secondary" onclick="hideAddMedicineForm()">Cancel</button>
+                    </form>
+                </div>
+
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Medicine Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Royal Oak Pharmacy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/inventory.js"></script>
+</body>
+</html>
