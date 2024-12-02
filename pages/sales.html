@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales - Royal Oak Pharmacy</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Royal Oak Pharmacy Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="sales.html" class="active">Sales</a></li>
+                    <li><a href="customers.html">Customers</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Sales Management</h1>
+                <button class="btn-primary" onclick="showNewSaleForm()">New Sale</button>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div id="newSaleForm" class="form-container" style="display: none;">
+                    <h3>Create New Sale</h3>
+                    <form onsubmit="createSale(event)">
+                        <input type="text" id="customerName" placeholder="Customer Name" required>
+                        <select id="medicineSelect" required>
+                            <option value="">Select Medicine</option>
+                        </select>
+                        <input type="number" id="saleQuantity" placeholder="Quantity" min="1" required>
+                        <button type="submit" class="btn-primary">Complete Sale</button>
+                        <button type="button" class="btn-secondary" onclick="hideNewSaleForm()">Cancel</button>
+                    </form>
+                </div>
+
+                <div class="sales-summary">
+                    <h3>Today's Sales Summary</h3>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <p>Total Sales</p>
+                            <h2 id="totalSalesToday">$0.00</h2>
+                        </div>
+                        <div class="summary-card">
+                            <p>Number of Transactions</p>
+                            <h2 id="transactionsToday">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Recent Sales</h3>
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Customer</th>
+                            <th>Medicine</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salesTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Royal Oak Pharmacy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/sales.js"></script>
+</body>
+</html>
