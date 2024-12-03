@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Royal Oak Pharmacy</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Royal Oak Pharmacy Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="sales.html">Sales</a></li>
+                    <li><a href="customers.html">Customers</a></li>
+                    <li><a href="reports.html" class="active">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Reports & Analytics</h1>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="report-filters">
+                    <h3>Generate Reports</h3>
+                    <div class="filter-group">
+                        <label>Report Type:</label>
+                        <select id="reportType">
+                            <option value="inventory">Inventory Report</option>
+                            <option value="sales">Sales Report</option>
+                            <option value="expiry">Expiry Report</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date Range:</label>
+                        <input type="date" id="startDate">
+                        <input type="date" id="endDate">
+                    </div>
+                    <button class="btn-primary" onclick="generateReport()">Generate Report</button>
+                </div>
+
+                <div class="report-display" id="reportDisplay">
+                    <h3>Report Summary</h3>
+                    <div class="report-stats">
+                        <div class="stat-item">
+                            <h4>Total Inventory Value</h4>
+                            <p id="totalInventoryValue">$0.00</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>Low Stock Items</h4>
+                            <p id="lowStockCount">0</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>Expiring Soon (30 days)</h4>
+                            <p id="expiringSoonCount">0</p>
+                        </div>
+                    </div>
+
+                    <div id="reportDetails">
+                        <p>Select report type and generate to view details</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Royal Oak Pharmacy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/reports.js"></script>
+</body>
+</html>
