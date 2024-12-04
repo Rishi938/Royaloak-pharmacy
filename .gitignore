@@ -18,9 +18,26 @@ logs/
 *.temp
 ~*
 
-# Node modules (if using npm in future)
+# Node modules
 node_modules/
+package-lock.json
+yarn.lock
 
 # Environment files
 .env
 .env.local
+.env.production
+backend/.env
+
+# Build files
+build/
+dist/
+*.build
+
+# Database
+*.db
+*.sqlite
+
+# Coverage
+coverage/
+.nyc_output/
