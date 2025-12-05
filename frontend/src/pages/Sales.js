@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 import { API_ENDPOINTS } from '../config';
+import Loading from '../components/Loading';
+import Notification from '../components/Notification';
 import './Sales.css';
 
 const Sales = () => {
@@ -9,6 +11,7 @@ const Sales = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showNewSale, setShowNewSale] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const [saleForm, setSaleForm] = useState({
     customerName: '',
@@ -45,7 +48,7 @@ const Sales = () => {
 
   const addItemToCart = () => {
     if (!currentItem.medicine || currentItem.quantity < 1) {
-      alert('Please select a medicine and quantity');
+      setNotification({ message: 'Please select a medicine and quantity', type: 'warning' });
       return;
     }
 
@@ -53,7 +56,7 @@ const Sales = () => {
     if (!medicine) return;
 
     if (currentItem.quantity > medicine.quantity) {
-      alert(`Only ${medicine.quantity} available in stock!`);
+      setNotification({ message: `Only ${medicine.quantity} available in stock!`, type: 'error' });
       return;
     }
 
@@ -67,6 +70,7 @@ const Sales = () => {
       }]
     });
 
+    setNotification({ message: 'Item added to cart!', type: 'success' });
     setCurrentItem({ medicine: '', quantity: 1 });
   };
 
@@ -83,7 +87,7 @@ const Sales = () => {
     e.preventDefault();
 
     if (saleForm.items.length === 0) {
-      alert('Please add at least one item to the cart');
+      setNotification({ message: 'Please add at least one item to the cart', type: 'warning' });
       return;
     }
 
@@ -97,20 +101,27 @@ const Sales = () => {
       });
 
       if (response.success) {
-        alert(`Sale completed! Invoice: ${response.data.invoiceNumber}`);
+        setNotification({ message: `Sale completed! Invoice: ${response.data.invoiceNumber}`, type: 'success' });
         setShowNewSale(false);
         setSaleForm({ customerName: '', paymentMethod: 'cash', items: [] });
         fetchData();
       }
     } catch (err) {
-      alert(err.message || 'Failed to create sale');
+      setNotification({ message: err.message || 'Failed to create sale', type: 'error' });
     }
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <Loading message="Loading sales data..." />;
 
   return (
     <div className="sales-page">
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <div className="page-header">
         <h1>💰 Sales Management</h1>
         <button className="btn-primary" onClick={() => setShowNewSale(!showNewSale)}>

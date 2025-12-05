@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 import { API_ENDPOINTS } from '../config';
+import Loading from '../components/Loading';
+import Notification from '../components/Notification';
 import './Medicines.css';
 
 const Medicines = () => {
@@ -9,6 +11,7 @@ const Medicines = () => {
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [notification, setNotification] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     genericName: '',
@@ -38,7 +41,7 @@ const Medicines = () => {
       }
     } catch (err) {
       console.error(err);
-      alert('Failed to load medicines');
+      setNotification({ message: 'Failed to load medicines', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -57,13 +60,13 @@ const Medicines = () => {
     try {
       const response = await api.post(API_ENDPOINTS.MEDICINES, formData);
       if (response.success) {
-        alert('Medicine added successfully!');
+        setNotification({ message: 'Medicine added successfully!', type: 'success' });
         setShowForm(false);
         fetchMedicines();
         resetForm();
       }
     } catch (err) {
-      alert(err.message || 'Failed to add medicine');
+      setNotification({ message: err.message || 'Failed to add medicine', type: 'error' });
     }
   };
 
@@ -71,10 +74,10 @@ const Medicines = () => {
     if (window.confirm('Are you sure you want to delete this medicine?')) {
       try {
         await api.delete(`${API_ENDPOINTS.MEDICINES}/${id}`);
-        alert('Medicine deleted successfully!');
+        setNotification({ message: 'Medicine deleted successfully!', type: 'success' });
         fetchMedicines();
       } catch (err) {
-        alert('Failed to delete medicine');
+        setNotification({ message: 'Failed to delete medicine', type: 'error' });
       }
     }
   };
@@ -105,10 +108,17 @@ const Medicines = () => {
     return matchesSearch && matchesCategory;
   });
 
-  if (loading) return <div className="loading">Loading medicines...</div>;
+  if (loading) return <Loading message="Loading medicines..." />;
 
   return (
     <div className="medicines-page">
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <div className="page-header">
         <h1>💊 Medicine Inventory</h1>
         <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
